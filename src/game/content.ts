@@ -76,3 +76,14 @@ export function sample<T>(arr: T[], n: number): T[] {
 export function questionById(id: string): Question | undefined {
   return questions.find((q) => q.id === id);
 }
+
+// 選択肢の順番をシャッフルし、正解の位置をバラけさせる。
+// （データ上の正解が特定の位置に偏っていても、出題ごとにランダムになる）
+export function shuffleChoices(q: Question): Question {
+  const order = shuffle(q.choices.map((_, i) => i));
+  return {
+    ...q,
+    choices: order.map((i) => q.choices[i]),
+    answer: order.indexOf(q.answer),
+  };
+}

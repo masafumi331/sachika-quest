@@ -8,6 +8,7 @@ import {
   questions,
   sample,
   shuffle,
+  shuffleChoices,
   subjectLabel,
 } from "../game/content";
 import { reviewPriority } from "../game/srs";
@@ -61,7 +62,7 @@ export default function Battle({
     // にがて・期限切れを優先しつつ、上位を多めにとってからランダムに選んで変化をつける
     const ranked = [...pool].sort((a, b) => reviewPriority(state, a, now) - reviewPriority(state, b, now));
     const head = ranked.slice(0, Math.min(ranked.length, n * 2));
-    setSession(shuffle(sample(head, Math.min(n, head.length))));
+    setSession(shuffle(sample(head, Math.min(n, head.length))).map(shuffleChoices));
     setIndex(0);
     setAnsweredChoice(null);
     setSessionCorrect(0);
