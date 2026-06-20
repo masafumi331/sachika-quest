@@ -1,0 +1,5 @@
+node_modules/
+dist/
+scripts/_ocr_images/
+*.local
+.DS_Store
